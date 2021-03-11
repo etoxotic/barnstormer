@@ -19,10 +19,10 @@ public class Controls : MonoBehaviour
             Yaw -= 1;
 
         // ”правление тангажем на клавиши W и S
-        Pitch = Input.GetAxis("Horizontal");
+        Pitch = Input.GetAxis("Vertical");
 
         // ”правление креном на клавиши A и D
-        Roll = Input.GetAxis("Vertical");
+        Roll = Input.GetAxis("Horizontal");
 
         // ”правление т€гой на LeftShift и LeftCtrl
         if (Input.GetKey(KeyCode.LeftShift)) 
