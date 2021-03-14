@@ -41,10 +41,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2898005034369481303}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d51d36c4c5524114eb0bfa3964c9aab6, type: 3}
+  m_Script: {fileID: 11500000, guid: b4dc1296e3cc27241a0bf21cbef423bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ringPrefab: {fileID: 6849963727022969122, guid: a02b74cf7f605774e8b548b50240eb34, type: 3}
+  ringPrefab: {fileID: 6849963727022969122, guid: baffe83de314f964bbecd0a79a17dd71, type: 3}
   OnStart:
     m_PersistentCalls:
       m_Calls: []
@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 4023404864838799067}
   - component: {fileID: 3751557228001657412}
   - component: {fileID: 2219181012912530699}
-  - component: {fileID: 3134392005159201637}
+  - component: {fileID: 1388851665481372820}
   m_Layer: 0
   m_Name: Checkpoint 0
   m_TagString: Untagged
@@ -147,7 +147,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3134392005159201637
+--- !u!114 &1388851665481372820
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6742572543062822710}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5f97e7e1d990194686c208beff371ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ff09fb76cb0ee54da83ab57d7528a07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
