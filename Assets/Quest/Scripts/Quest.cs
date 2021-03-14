@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 // Это главный скрипт для квеста (мини игры)
 // Для удобства построения квеста в редакторе, квест будет строиться из сфер, 
@@ -8,12 +9,13 @@ using UnityEngine;
 public class Quest : MonoBehaviour
 {
     [SerializeField] private GameObject ringPrefab;
-    [SerializeField] private Material activeMaterial;
-    [SerializeField] private Material unactiveMaterial;
 
     private Checkpoint[] points;
     private Ring[] rings;
-    private int currentRing;
+    private int currentRing = 0;
+
+    private UnityEvent OnStart;
+    private UnityEvent OnFinish;
 
     private void Start()
     {
@@ -35,11 +37,47 @@ public class Quest : MonoBehaviour
             //Удаляем чекпоинт
             Destroy(point.gameObject);
         }
+        // Подпписываемся на события входа в первое кольцо
         rings[0].OnEnter.AddListener(RingEnterHandler);
     }
 
     private void RingEnterHandler()
     {
+        // Отписываемся от события входа в текущее кольцо
+        rings[currentRing].OnEnter.RemoveListener(RingEnterHandler);
 
+        //      Теперь обрабатываем особые случаи
+        // Если мы входим в первое кольцо
+        if (currentRing == 0)
+        {
+            // Вызываем событие начала мини игры
+            OnStart.Invoke();
+        }
+        // Если мы вошли в последнее кольцо
+        if (currentRing == rings.Length - 1)
+        {
+            // Вызываем событие окнчания мини игры
+            OnFinish.Invoke();
+        }
+
+
+        //    Теперь разберемся с тем, как меняется квест
+        // Если мы попали в любое кольцо кроме последнего и предпоследнего
+        if(currentRing < rings.Length - 2)
+        {
+            // Включаем кольцо через одно
+            rings[currentRing + 2].gameObject.SetActive(true);
+            // Активируем следующее
+            rings[currentRing + 1].Activate(false);
+            // Подписываемся на событи входа в седующее кольцо
+            rings[currentRing].OnEnter.AddListener(RingEnterHandler);
+        }
+        // Если попали в предпоследнее кольцо
+        if(currentRing == rings.Length - 2)
+        {
+            // Активируем следующее c финишным цветом
+            rings[currentRing + 1].Activate(true);
+        }
+        currentRing = currentRing + 1;
     }
 }
