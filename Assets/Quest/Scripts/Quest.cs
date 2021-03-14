@@ -7,10 +7,10 @@ using UnityEngine;
 // информация для пользовательского интерфейса.
 public class Quest : MonoBehaviour
 {
-    private Transform[] points;
+    private Checkpoint[] points;
     void Start()
     {
-        points = gameObject.GetComponentsInChildren<Transform>();
+        points = gameObject.GetComponentsInChildren<Checkpoint>();
         foreach (var point in points)
         {
             print(point.gameObject.name);
