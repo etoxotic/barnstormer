@@ -14,8 +14,8 @@ public class Quest : MonoBehaviour
     private Ring[] rings;
     private int currentRing = 0;
 
-    private UnityEvent OnStart;
-    private UnityEvent OnFinish;
+    private UnityEvent OnStart = new UnityEvent();
+    private UnityEvent OnFinish = new UnityEvent();
 
     private void Start()
     {
@@ -39,12 +39,20 @@ public class Quest : MonoBehaviour
         }
         // Подпписываемся на события входа в первое кольцо
         rings[0].OnEnter.AddListener(RingEnterHandler);
+
+        // Терперь отобразим первые две точки квеста
+        rings[0].Activate(false);
+        for (int i = 2; i < rings.Length; i++)
+        {
+            rings[i].gameObject.SetActive(false);
+        }
     }
 
     private void RingEnterHandler()
     {
         // Отписываемся от события входа в текущее кольцо
         rings[currentRing].OnEnter.RemoveListener(RingEnterHandler);
+        rings[currentRing].gameObject.SetActive(false);
 
         //      Теперь обрабатываем особые случаи
         // Если мы входим в первое кольцо
@@ -52,12 +60,14 @@ public class Quest : MonoBehaviour
         {
             // Вызываем событие начала мини игры
             OnStart.Invoke();
+            print("Start");
         }
         // Если мы вошли в последнее кольцо
         if (currentRing == rings.Length - 1)
         {
             // Вызываем событие окнчания мини игры
             OnFinish.Invoke();
+            print("Finish");
         }
 
 
@@ -69,14 +79,16 @@ public class Quest : MonoBehaviour
             rings[currentRing + 2].gameObject.SetActive(true);
             // Активируем следующее
             rings[currentRing + 1].Activate(false);
-            // Подписываемся на событи входа в седующее кольцо
-            rings[currentRing].OnEnter.AddListener(RingEnterHandler);
+            // Подписываемся на событи входа в следующее кольцо
+            rings[currentRing + 1].OnEnter.AddListener(RingEnterHandler);
         }
         // Если попали в предпоследнее кольцо
         if(currentRing == rings.Length - 2)
         {
             // Активируем следующее c финишным цветом
             rings[currentRing + 1].Activate(true);
+            // Подписываемся на событи входа в следующее кольцо
+            rings[currentRing + 1].OnEnter.AddListener(RingEnterHandler);
         }
         currentRing = currentRing + 1;
     }

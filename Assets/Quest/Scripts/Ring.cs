@@ -10,7 +10,6 @@ public class Ring : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         OnEnter.Invoke();
-        gameObject.SetActive(false);
     }
     public void Activate(bool isFinish)
     {
