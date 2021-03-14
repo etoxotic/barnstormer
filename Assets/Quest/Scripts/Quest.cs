@@ -14,9 +14,11 @@ namespace Quest
         private Checkpoint[] points;
         private Ring[] rings;
         private int currentRing = 0;
+        private bool questInProgress = false;
 
         public UnityEvent OnStart = new UnityEvent();
         public UnityEvent OnFinish = new UnityEvent();
+        public float Timer { get; private set; } = 0;
 
         private void Start()
         {
@@ -65,16 +67,18 @@ namespace Quest
             // Если мы входим в первое кольцо
             if (currentRing == 0)
             {
+                // Запускаем таймер
+                questInProgress = true;
                 // Вызываем событие начала мини игры
                 OnStart.Invoke();
-                print("Start");
             }
             // Если мы вошли в последнее кольцо
             if (currentRing == rings.Length - 1)
             {
+                // Останавливаем таймер
+                questInProgress = false;
                 // Вызываем событие окнчания мини игры
                 OnFinish.Invoke();
-                print("Finish");
             }
 
 
@@ -99,6 +103,14 @@ namespace Quest
             }
             // Переходм к следующему кольцу
             currentRing = currentRing + 1;
+        }
+
+        private void Update()
+        {
+            // Если квест уже начался
+            if(questInProgress)
+                // Увеличиваем показание таймера
+                Timer += Time.deltaTime;
         }
     }
 }
