@@ -1,25 +1,32 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Ring : MonoBehaviour
+namespace Quest
 {
-    public UnityEvent OnEnter;
-    [SerializeField] private Material activeMaterial;
-    [SerializeField] private Material finishMaterial;
+    // Этот скрипт висит на кольце и служит для отправки сообщений Quest-у
+    public class Ring : MonoBehaviour
+    {
 
-    private void OnTriggerEnter(Collider other)
-    {
-        OnEnter.Invoke();
-    }
-    public void Activate(bool isFinish)
-    {
-        if(isFinish)
+        public UnityEvent OnEnter;
+        [SerializeField] private Material activeMaterial;
+        [SerializeField] private Material finishMaterial;
+
+        private void OnTriggerEnter(Collider other)
         {
-            GetComponent<MeshRenderer>().material = finishMaterial;
+            // При входе самолетика в кольцо вызывается событи OnEnter
+            OnEnter.Invoke();
         }
-        else
+        public void Activate(bool isFinish)
         {
-            GetComponent<MeshRenderer>().material = activeMaterial;
+            // Выбираем активный цвет кольца
+            if (isFinish)
+            {
+                GetComponent<MeshRenderer>().material = finishMaterial;
+            }
+            else
+            {
+                GetComponent<MeshRenderer>().material = activeMaterial;
+            }
         }
     }
 }

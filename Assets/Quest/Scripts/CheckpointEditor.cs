@@ -1,25 +1,29 @@
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(Checkpoint))]
-public class CheckpointEditor : Editor
+namespace Quest
 {
-    private SerializedProperty id;
-    private Checkpoint checkpoint;
-    private void OnEnable()
+    // Этот скрипт добавляет кнопку для быстрого добавления нового чекпоинта
+    [CustomEditor(typeof(Checkpoint))]
+    public class CheckpointEditor : Editor
     {
-        id = serializedObject.FindProperty("id");
-        checkpoint = (Checkpoint)target;
-    }
-    public override void OnInspectorGUI()
-    {
-        serializedObject.Update();
-        EditorGUILayout.PropertyField(id);
-        serializedObject.ApplyModifiedProperties();
-
-        if (GUILayout.Button("CreateNextRing"))
+        private SerializedProperty id;
+        private Checkpoint checkpoint;
+        private void OnEnable()
         {
-            checkpoint.CreateNextCheckpoint();
+            id = serializedObject.FindProperty("id");
+            checkpoint = (Checkpoint)target;
+        }
+        public override void OnInspectorGUI()
+        {
+            serializedObject.Update();
+            EditorGUILayout.PropertyField(id);
+            serializedObject.ApplyModifiedProperties();
+
+            if (GUILayout.Button("CreateNextRing"))
+            {
+                checkpoint.CreateNextCheckpoint();
+            }
         }
     }
 }
