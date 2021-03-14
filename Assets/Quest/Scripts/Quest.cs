@@ -47,6 +47,12 @@ namespace Quest
             {
                 rings[i].gameObject.SetActive(false);
             }
+
+            // И повернем кольца в правильном направлении
+            for (int i = 1; i < rings.Length; i++)
+            {
+                rings[i].transform.LookAt(rings[i - 1].transform);
+            }
         }
 
         private void RingEnterHandler()

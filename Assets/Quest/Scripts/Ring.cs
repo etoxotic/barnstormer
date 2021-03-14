@@ -21,11 +21,11 @@ namespace Quest
             // Выбираем активный цвет кольца
             if (isFinish)
             {
-                GetComponent<MeshRenderer>().material = finishMaterial;
+                GetComponentInChildren<MeshRenderer>().material = finishMaterial;
             }
             else
             {
-                GetComponent<MeshRenderer>().material = activeMaterial;
+                GetComponentInChildren<MeshRenderer>().material = activeMaterial;
             }
         }
     }
