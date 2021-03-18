@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 275de6798f4c4da4fb65fe6da410e524
+  - enabled: 1
+    path: Assets/Scenes/Faraway.unity
+    guid: 9b6b55ae6731219ffa15aeca64de1152
   m_configObjects: {}
